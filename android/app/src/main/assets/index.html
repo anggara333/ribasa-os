@@ -2,121 +2,104 @@
 <html lang="id" class="h-full">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Inventory - Ribasa</title>
+<title>Ribasa</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/alpinejs@3.15.0/dist/cdn.min.js" defer></script>
-<style>*{font-family:'Plus Jakarta Sans',sans-serif}.font-mono{font-family:'JetBrains Mono',monospace!important}[x-cloak]{display:none!important}.page{display:none}.page.active{display:block}</style>
+<style>*{font-family:'Plus Jakarta Sans',sans-serif}[x-cloak]{display:none!important}.font-mono{font-family:'JetBrains Mono',monospace!important}.page{display:none}.page.active{display:block}</style>
 </head>
-<body class="h-full bg-[#F5F5F0] text-zinc-900 antialiased" x-data="inventoryApp()" x-init="init()">
+<body class="h-full bg-[#F5F5F0] text-zinc-900 antialiased" x-data="app()" x-init="init()">
 
-<main class="p-4 max-w-[800px] mx-auto w-full pb-[88px] lg:pb-8 space-y-4">
+<main class="p-4 max-w-[800px] mx-auto w-full pb-[88px] lg:pb-8">
 
-<!-- HOME PAGE -->
+<!-- HOME - FIX 8 ICONS -->
 <div id="p-home" class="page active space-y-4">
   <div class="bg-zinc-900 rounded-[20px] p-5 text-white relative overflow-hidden">
     <div class="absolute -top-20 -right-20 w-60 h-60 bg-amber-400/20 rounded-full blur-[40px]"></div>
-    <div class="relative"><div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-[10px] font-bold"><span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> LIVE • 2026</div><h1 class="text-[20px] font-extrabold mt-3">Ribasa Chicken OS</h1><p id="jamWIB" class="text-white/50 text-[11px] font-mono mt-1"></p></div>
+    <div class="relative z-10"><div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-[10px] font-bold"><span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> LIVE • 2026</div><h1 class="text-[20px] font-extrabold mt-3">Ribasa Chicken OS</h1><p id="jamWIB" class="text-white/50 text-[11px] font-mono mt-1"></p></div>
   </div>
-  <div class="bg-white rounded-[20px] p-4 border"><p class="text-[9px] font-bold tracking-[0.2em] text-zinc-400 mb-3">MENU CEPAT</p>
+
+  <div class="bg-white rounded-[20px] p-4 border border-zinc-200">
+    <p class="text-[9px] font-bold tracking-[0.2em] text-zinc-400 mb-3">MENU CEPAT</p>
     <div class="grid grid-cols-4 gap-3">
-      <a @click="go('produk')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-amber-400 grid place-items-center"><i class="fa-solid fa-layer-group"></i></div><span class="text-[10px] font-bold">Inventory</span></a>
-      <a @click="go('walk')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-emerald-500 text-white grid place-items-center"><i class="fa-solid fa-bag-shopping"></i></div><span class="text-[10px] font-bold">POS Sale</span></a>
-      <a @click="go('cash')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-emerald-50 border text-emerald-600 grid place-items-center"><i class="fa-solid fa-wallet"></i></div><span class="text-[10px] font-bold">Cash</span></a>
-      <a @click="go('lunara')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white grid place-items-center"><i class="fa-solid fa-wand-magic-sparkles"></i></div><span class="text-[10px] font-bold">Lunara</span></a>
+      <a @click="go('produk')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-amber-400 grid place-items-center text-zinc-900 shadow-sm"><i class="fa-solid fa-layer-group"></i></div><span class="text-[10px] font-bold text-center leading-tight">Inventory</span></a>
+      <a @click="go('incoming')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-zinc-900 text-white grid place-items-center shadow-sm"><i class="fa-solid fa-box-open"></i></div><span class="text-[10px] font-bold">Masuk</span></a>
+      <a @click="go('outgoing')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-white border border-zinc-200 grid place-items-center shadow-sm"><i class="fa-solid fa-truck-fast"></i></div><span class="text-[10px] font-bold">Keluar</span></a>
+      <a @click="go('walk')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-emerald-500 text-white grid place-items-center shadow-sm"><i class="fa-solid fa-bag-shopping"></i></div><span class="text-[10px] font-bold">POS Sale</span></a>
+      <a @click="go('karyawan')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-violet-100 text-violet-600 grid place-items-center"><i class="fa-solid fa-id-badge"></i></div><span class="text-[10px] font-bold">Karyawan</span></a>
+      <a @click="go('cash')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-emerald-50 border border-emerald-200 text-emerald-600 grid place-items-center"><i class="fa-solid fa-wallet"></i></div><span class="text-[10px] font-bold">Cash</span></a>
+      <a @click="go('tunggakan')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-red-50 border border-red-200 text-red-600 grid place-items-center"><i class="fa-solid fa-triangle-exclamation"></i></div><span class="text-[10px] font-bold">Tunggakan</span></a>
+      <a @click="go('lunara')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white grid place-items-center shadow"><i class="fa-solid fa-wand-magic-sparkles"></i></div><span class="text-[10px] font-bold">Lunara</span></a>
     </div>
   </div>
-  <div class="grid grid-cols-2 gap-3"><div class="bg-white rounded-[18px] p-4 border"><p class="text-[9px] font-bold tracking-widest text-zinc-400">CASHFLOW HARI INI</p><p class="text-[16px] font-black font-mono mt-2 text-emerald-600" x-text="'Rp '+totalStok"></p></div><div class="bg-zinc-900 rounded-[18px] p-4 text-white"><p class="text-[9px] font-bold tracking-widest text-white/50">TOTAL PRODUK</p><p class="text-[16px] font-black font-mono mt-2 text-amber-300" x-text="produks.length+' SKU'"></p></div></div>
+
+  <div class="grid grid-cols-2 gap-3">
+    <div class="bg-white rounded-[18px] p-4 border"><p class="text-[9px] font-bold tracking-widest text-zinc-400">CASHFLOW HARI INI</p><p class="text-[16px] font-black font-mono mt-2 text-emerald-600">Rp 1.240.000</p></div>
+    <div class="bg-zinc-900 rounded-[18px] p-4 text-white"><p class="text-[9px] font-bold tracking-widest text-white/50">LABA BULAN INI</p><p class="text-[16px] font-black font-mono mt-2 text-amber-300">Rp 4.820.000</p></div>
+    <div class="bg-white rounded-[18px] p-4 border"><p class="text-[9px] font-bold tracking-widest text-zinc-400">PIUTANG</p><p class="text-[16px] font-black font-mono mt-2">Rp 2.400.000</p><p class="text-[10px] text-zinc-500 mt-1">3 org</p></div>
+    <div class="bg-white rounded-[18px] p-4 border"><p class="text-[9px] font-bold tracking-widest text-zinc-400">STOK</p><p class="text-[16px] font-black mt-2" x-text="totalStok+' pcs'"></p><p class="text-[9px] mt-2"><span class="bg-red-50 text-red-600 px-2 py-0.5 rounded-full font-bold border border-red-200" x-text="'TIPIS '+produks.filter(p=>p.jumlah<=5).length"></span></p></div>
+  </div>
+
+  <div class="bg-white rounded-[18px] p-4 border">
+    <h3 class="font-bold text-[12px]">Laba 12 Bulan</h3>
+    <div class="flex items-end gap-1 h-28 mt-4">
+      <template x-for="m in 12"><div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" :style="`height:${30+Math.random()*50}%`"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" :style="`height:${40+Math.random()*50}%`"></div></div><p class="text-[7px] font-bold text-zinc-500" x-text="['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'][m-1]"></p></div></template>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-[18px] p-4 border">
+    <div class="flex justify-between items-center"><h3 class="font-bold text-[12px]">Stok Menipis</h3><a @click="go('produk')" class="text-[10px] font-bold px-3 py-1 bg-zinc-900 text-white rounded-full cursor-pointer">Lihat</a></div>
+    <div class="mt-2"><template x-for="p in produks.filter(x=>x.jumlah<=5).slice(0,3)"><div class="flex justify-between items-center py-3 border-b border-zinc-100 last:border-0"><span class="text-[13px] truncate pr-3" x-text="p.produk"></span><span class="bg-zinc-900 text-amber-300 px-2.5 py-1 rounded-full text-[11px] font-mono font-bold" x-text="p.jumlah"></span></div></template><div x-show="produks.filter(x=>x.jumlah<=5).length==0" class="py-8 text-center text-[12px] font-bold text-emerald-600">Semua stok aman!</div></div>
+  </div>
 </div>
 
-<!-- INVENTORY PAGE - FULL CLONE DARI BLADE LU -->
+<!-- INVENTORY - UI FIX -->
 <div id="p-produk" class="page space-y-4">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-zinc-900 text-white grid place-items-center"><i class="fa-solid fa-boxes-stacked text-[14px]"></i></div>
-            <div><h2 class="text-[15px] font-extrabold tracking-tight">Data Inventory</h2><p class="text-[11px] text-zinc-500 font-mono -mt-0.5">Stok Ribasa Chicken • Live <span x-text="produks.length"></span> SKU</p></div>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-zinc-900 text-white grid place-items-center"><i class="fa-solid fa-boxes-stacked text-[14px]"></i></div><div><h2 class="text-[15px] font-extrabold tracking-tight leading-none">Data Inventory</h2><p class="text-[11px] text-zinc-500 font-mono mt-1">Stok Ribasa Chicken • Live • <span x-text="produks.length+' produk'"></span></p></div></div>
+    <button @click="openCreate=true" class="h-9 bg-zinc-900 text-white px-4 rounded-full text-[12px] font-bold hover:bg-black shadow flex items-center gap-1.5"><i class="fa-solid fa-plus text-[11px]"></i> Tambah</button>
+  </div>
+
+  <div x-show="toast" x-transition.opacity class="bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] px-4 py-2.5 rounded-full flex items-center gap-2"><i class="fa-solid fa-circle-check"></i> <span x-text="toast"></span></div>
+
+  <div class="grid gap-2.5 lg:hidden">
+    <template x-for="p in produks" :key="p.id">
+      <div class="bg-white rounded-[16px] border border-zinc-200 p-3.5 flex items-center justify-between shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+        <div class="flex items-center gap-3 min-w-0 flex-1">
+          <div class="w-9 h-9 rounded-full bg-zinc-50 border border-zinc-200 grid place-items-center text-[11px] font-black shrink-0" x-text="p.produk.substring(0,1).toUpperCase()"></div>
+          <div class="min-w-0 flex-1"><p class="text-[13px] font-bold truncate leading-tight" x-text="p.produk"></p><p class="text-[10px] font-mono text-zinc-500 truncate mt-0.5" x-text="p.kode_produk+' • '+(p.keterangan||'-')"></p></div>
         </div>
-        <button @click="openCreate=true" class="h-9 bg-zinc-900 text-white px-4 rounded-full text-[12px] font-bold shadow flex items-center gap-1.5"><i class="fa-solid fa-plus text-[11px]"></i> Tambah</button>
-    </div>
-
-    <div x-show="toast" x-transition class="bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] px-4 py-2.5 rounded-full flex items-center gap-2"><i class="fa-solid fa-circle-check"></i> <span x-text="toast"></span></div>
-
-    <!-- MOBILE CARD - PERSIS BLADE -->
-    <div class="grid gap-2 lg:hidden">
-        <template x-for="p in produks" :key="p.id">
-        <div class="bg-white rounded-[16px] border border-zinc-200 p-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-3 min-w-0">
-                <div class="w-9 h-9 rounded-full bg-zinc-50 border grid place-items-center text-[11px] font-black" x-text="p.produk.substring(0,1)"></div>
-                <div class="min-w-0"><p class="text-[13px] font-bold truncate" x-text="p.produk"></p><p class="text-[10px] font-mono text-zinc-500" x-text="p.kode_produk+' • '+(p.keterangan||'-')"></p></div>
-            </div>
-            <div class="flex items-center gap-2 shrink-0">
-                <span class="font-mono text-[11px] border px-2.5 py-1 rounded-full" :class="p.jumlah<=5?'bg-red-50 border-red-200 text-red-600':'bg-zinc-900 text-amber-300'" x-text="p.jumlah"></span>
-                <button @click="openEditData(p)" class="w-8 h-8 rounded-full bg-zinc-50 border grid place-items-center"><i class="fa-solid fa-pen text-[11px]"></i></button>
-                <button @click="hapus(p.id)" class="w-8 h-8 rounded-full bg-white border text-zinc-400 grid place-items-center"><i class="fa-solid fa-trash text-[11px]"></i></button>
-            </div>
+        <div class="flex items-center gap-2 shrink-0 ml-2">
+          <span class="font-mono text-[11px] border px-2.5 py-1 rounded-full font-bold min-w-[32px] text-center" :class="p.jumlah<=5?'bg-red-50 border-red-200 text-red-600':'bg-zinc-900 text-amber-300 border-zinc-900'" x-text="p.jumlah"></span>
+          <button @click="openEditData(p)" class="w-8 h-8 rounded-full bg-zinc-50 border border-zinc-200 grid place-items-center hover:bg-white hover:border-zinc-900 transition"><i class="fa-solid fa-pen text-[11px]"></i></button>
         </div>
-        </template>
-        <div x-show="produks.length==0" class="bg-white rounded-[16px] border p-10 text-center text-zinc-400 text-[13px]">Belum ada produk - Klik Tambah</div>
-    </div>
+      </div>
+    </template>
+    <div x-show="produks.length==0" class="bg-white rounded-[16px] border border-zinc-200 p-10 text-center text-zinc-400 text-[13px]">Belum ada produk<br><button @click="openCreate=true" class="mt-2 text-zinc-900 font-bold underline">+ Tambah sekarang</button></div>
+  </div>
 
-    <!-- DESKTOP TABLE - PERSIS BLADE -->
-    <div class="hidden lg:block bg-white rounded-[20px] border border-zinc-200 overflow-hidden">
-        <div class="p-4 flex justify-between items-center border-b border-zinc-100"><h3 class="font-bold text-[13px]">List Produk</h3><span class="text-[11px] font-mono bg-zinc-50 border px-3 py-1 rounded-full" x-text="produks.length+' produk'"></span></div>
-        <div class="overflow-x-auto"><table class="w-full text-[13px]">
-            <thead><tr class="bg-zinc-50/80 text-[11px] tracking-widest uppercase text-zinc-400"><th class="py-3 px-4 text-left font-bold">No</th><th class="py-3 px-3 text-left font-bold">Kode</th><th class="py-3 px-3 text-left font-bold">Nama Produk</th><th class="py-3 px-3 text-left font-bold">Jumlah</th><th class="py-3 px-3 text-left font-bold">Keterangan</th><th class="py-3 px-4 text-center font-bold">Aksi</th></tr></thead>
-            <tbody>
-                <template x-for="(p,i) in produks" :key="p.id">
-                <tr class="border-t border-zinc-100 hover:bg-zinc-50/50">
-                    <td class="py-3.5 px-4 font-mono text-[12px] text-zinc-400" x-text="String(i+1).padStart(2,'0')"></td>
-                    <td class="py-3.5 px-3"><span class="font-mono font-bold bg-zinc-900 text-white px-2.5 py-1 rounded-full text-[11px]" x-text="p.kode_produk"></span></td>
-                    <td class="py-3.5 px-3 font-bold flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-zinc-50 border grid place-items-center text-[10px] font-black" x-text="p.produk.substring(0,1)"></div><span x-text="p.produk"></span></td>
-                    <td class="py-3.5 px-3"><span class="font-mono text-[11px] border px-2.5 py-1 rounded-full" :class="p.jumlah<=5?'bg-red-50 border-red-200 text-red-600':'bg-zinc-50'" x-text="p.jumlah"></span></td>
-                    <td class="py-3.5 px-3 text-[12px] text-zinc-500 max-w-[200px] truncate" x-text="p.keterangan||'-'"></td>
-                    <td class="py-3.5 px-4"><div class="flex justify-center gap-1.5"><button @click="openEditData(p)" class="w-8 h-8 rounded-full bg-white border grid place-items-center hover:border-zinc-900"><i class="fa-solid fa-pen text-[11px]"></i></button><button @click="hapus(p.id)" class="w-8 h-8 rounded-full bg-white border text-zinc-400 grid place-items-center hover:bg-red-50 hover:text-red-600"><i class="fa-solid fa-trash text-[11px]"></i></button></div></td>
-                </tr>
-                </template>
-            </tbody>
-        </table></div>
-    </div>
+  <div class="hidden lg:block bg-white rounded-[20px] border border-zinc-200 overflow-hidden shadow-sm">
+    <div class="p-4 flex justify-between items-center border-b border-zinc-100"><h3 class="font-bold text-[13px]">List Produk</h3><span class="text-[11px] font-mono bg-zinc-50 border px-3 py-1 rounded-full" x-text="produks.length+' produk'"></span></div>
+    <div class="overflow-x-auto"><table class="w-full text-[13px]"><thead><tr class="bg-zinc-50/80 text-[11px] tracking-widest uppercase text-zinc-400"><th class="py-3 px-4 text-left font-bold">No</th><th class="py-3 px-3 text-left font-bold">Kode</th><th class="py-3 px-3 text-left font-bold">Nama Produk</th><th class="py-3 px-3 text-left font-bold">Jumlah</th><th class="py-3 px-3 text-left font-bold">Keterangan</th><th class="py-3 px-4 text-center font-bold">Aksi</th></tr></thead><tbody>
+      <template x-for="(p,i) in produks" :key="p.id"><tr class="border-t border-zinc-100 hover:bg-zinc-50/50 transition"><td class="py-3.5 px-4 font-mono text-[12px] text-zinc-400" x-text="String(i+1).padStart(2,'0')"></td><td class="py-3.5 px-3"><span class="font-mono font-bold bg-zinc-900 text-white px-2.5 py-1 rounded-full text-[11px]" x-text="p.kode_produk"></span></td><td class="py-3.5 px-3 font-bold flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-zinc-50 border grid place-items-center text-[10px] font-black" x-text="p.produk.substring(0,1).toUpperCase()"></div><span x-text="p.produk"></span></td><td class="py-3.5 px-3"><span class="font-mono text-[11px] border px-2.5 py-1 rounded-full font-bold" :class="p.jumlah<=5?'bg-red-50 border-red-200 text-red-600':'bg-zinc-50 border-zinc-200'" x-text="p.jumlah"></span></td><td class="py-3.5 px-3 text-[12px] text-zinc-500 max-w-[200px] truncate" x-text="p.keterangan||'-'"></td><td class="py-3.5 px-4"><div class="flex justify-center gap-1.5"><button @click="openEditData(p)" class="w-8 h-8 rounded-full bg-white border grid place-items-center hover:border-zinc-900"><i class="fa-solid fa-pen text-[11px]"></i></button><button @click="hapus(p.id)" class="w-8 h-8 rounded-full bg-white border text-zinc-400 grid place-items-center hover:bg-red-50 hover:text-red-600"><i class="fa-solid fa-trash text-[11px]"></i></button></div></td></tr></template>
+    </tbody></table></div>
+  </div>
 
-    <!-- MODAL CREATE - PERSIS BLADE -->
-    <div x-show="openCreate" x-cloak x-transition.opacity class="fixed inset-0 z-[70] flex items-end lg:items-center justify-center bg-zinc-900/30 backdrop-blur-[6px] p-0 lg:p-4">
-        <div @click="openCreate=false" class="absolute inset-0"></div>
-        <div x-transition.scale class="relative bg-white rounded-t-[24px] lg:rounded-[20px] w-full max-w-lg shadow-xl border border-zinc-200 p-6 space-y-4 max-h-[90vh] overflow-auto">
-            <div class="flex justify-between items-center"><h3 class="font-bold text-[14px]">Tambah Produk</h3><button @click="openCreate=false" class="w-8 h-8 bg-zinc-50 border rounded-full grid place-items-center"><i class="fa-solid fa-xmark"></i></button></div>
-            <form @submit.prevent="createProduk()" class="space-y-4">
-                <div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Kode Produk</label><input type="text" disabled :value="nextKode" class="w-full h-[42px] rounded-full bg-zinc-50 border px-4 text-[11px] font-mono mt-1"></div>
-                <div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Nama Produk *</label><input type="text" x-model="form.produk" required autocomplete="off" placeholder="Contoh: Whole Boiler 0.6-0.7" class="w-full h-[42px] rounded-full bg-zinc-50 border px-4 text-[13px] focus:border-zinc-900 outline-none mt-1"></div>
-                <div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Jumlah *</label><input type="number" x-model.number="form.jumlah" required min="0" class="w-full h-[42px] rounded-full bg-zinc-50 border px-4 text-[13px] mt-1"></div>
-                <div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Keterangan</label><textarea x-model="form.keterangan" rows="3" placeholder="fresh / frozen" class="w-full rounded-[16px] bg-zinc-50 border p-3 text-[13px] mt-1"></textarea></div>
-                <button type="submit" class="w-full h-11 bg-zinc-900 text-white rounded-full text-[13px] font-bold">Simpan Produk</button>
-            </form>
-        </div>
-    </div>
+  <div x-show="openCreate" x-cloak x-transition.opacity class="fixed inset-0 z-[70] flex items-end lg:items-center justify-center bg-zinc-900/30 backdrop-blur-[6px] p-0 lg:p-4"><div @click="openCreate=false" class="absolute inset-0"></div><div x-transition.scale class="relative bg-white rounded-t-[24px] lg:rounded-[20px] w-full max-w-lg shadow-xl border border-zinc-200 p-6 space-y-4 max-h-[90vh] overflow-auto"><div class="flex justify-between items-center"><h3 class="font-bold text-[14px]">Tambah Produk</h3><button @click="openCreate=false" class="w-8 h-8 bg-zinc-50 border rounded-full grid place-items-center"><i class="fa-solid fa-xmark"></i></button></div><form @submit.prevent="createProduk()" class="space-y-4"><div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Kode Produk</label><input type="text" disabled :value="nextKode" class="w-full h-[42px] rounded-full bg-zinc-50 border border-zinc-200 px-4 text-[11px] font-mono mt-1"></div><div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Nama Produk *</label><input type="text" x-model="form.produk" required placeholder="Contoh: Whole Boiler 0.6-0.7" class="w-full h-[42px] rounded-full bg-zinc-50 border border-zinc-200 px-4 text-[13px] focus:border-zinc-900 outline-none mt-1"></div><div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Jumlah *</label><input type="number" x-model.number="form.jumlah" required min="0" value="0" class="w-full h-[42px] rounded-full bg-zinc-50 border border-zinc-200 px-4 text-[13px] mt-1"></div><div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Keterangan</label><textarea x-model="form.keterangan" rows="3" placeholder="fresh / frozen" class="w-full rounded-[16px] bg-zinc-50 border border-zinc-200 p-3 text-[13px] mt-1 outline-none focus:border-zinc-900"></textarea></div><button type="submit" class="w-full h-11 bg-zinc-900 text-white rounded-full text-[13px] font-bold">Simpan Produk</button></form></div></div>
 
-    <!-- MODAL EDIT - PERSIS BLADE -->
-    <div x-show="openEdit" x-cloak x-transition.opacity class="fixed inset-0 z-[70] flex items-end lg:items-center justify-center bg-zinc-900/30 backdrop-blur-[6px] p-0 lg:p-4">
-        <div @click="openEdit=false" class="absolute inset-0"></div>
-        <div x-transition.scale class="relative bg-white rounded-t-[24px] lg:rounded-[20px] w-full max-w-lg shadow-xl border p-6 space-y-4 max-h-[90vh] overflow-auto">
-            <div class="flex justify-between items-center"><h3 class="font-bold text-[14px]">Edit - <span x-text="editData.produk" class="text-zinc-500"></span></h3><button @click="openEdit=false" class="w-8 h-8 bg-zinc-50 border rounded-full grid place-items-center"><i class="fa-solid fa-xmark"></i></button></div>
-            <form @submit.prevent="updateProduk()" class="space-y-4">
-                <div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Kode</label><input type="text" :value="editData.kode_produk" disabled class="w-full h-[42px] rounded-full bg-zinc-100 border px-4 font-mono font-bold text-[13px] mt-1"></div>
-                <div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Nama Produk</label><input type="text" x-model="editData.produk" required class="w-full h-[42px] rounded-full bg-zinc-50 border px-4 text-[13px] mt-1"></div>
-                <div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Jumlah</label><input type="number" x-model.number="editData.jumlah" class="w-full h-[42px] rounded-full bg-zinc-50 border px-4 text-[13px] mt-1"><p class="text-[10px] text-zinc-400 font-mono mt-1">Di APK bisa edit langsung (versi web terkunci)</p></div>
-                <div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Keterangan</label><textarea x-model="editData.keterangan" rows="3" class="w-full rounded-[16px] bg-zinc-50 border p-3 text-[13px] mt-1"></textarea></div>
-                <button type="submit" class="w-full h-11 bg-zinc-900 text-white rounded-full text-[13px] font-bold">Update Produk</button>
-            </form>
-        </div>
-    </div>
+  <div x-show="openEdit" x-cloak x-transition.opacity class="fixed inset-0 z-[70] flex items-end lg:items-center justify-center bg-zinc-900/30 backdrop-blur-[6px] p-0 lg:p-4"><div @click="openEdit=false" class="absolute inset-0"></div><div x-transition.scale class="relative bg-white rounded-t-[24px] lg:rounded-[20px] w-full max-w-lg shadow-xl border p-6 space-y-4 max-h-[90vh] overflow-auto"><div class="flex justify-between items-center"><h3 class="font-bold text-[14px]">Edit - <span x-text="editData.produk" class="text-zinc-500"></span></h3><button @click="openEdit=false" class="w-8 h-8 bg-zinc-50 border rounded-full grid place-items-center"><i class="fa-solid fa-xmark"></i></button></div><form @submit.prevent="updateProduk()" class="space-y-4"><div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Kode</label><input type="text" :value="editData.kode_produk" disabled class="w-full h-[42px] rounded-full bg-zinc-100 border px-4 font-mono font-bold text-[13px] mt-1"></div><div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Nama Produk</label><input type="text" x-model="editData.produk" required class="w-full h-[42px] rounded-full bg-zinc-50 border px-4 text-[13px] mt-1"></div><div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Jumlah</label><input type="number" x-model.number="editData.jumlah" class="w-full h-[42px] rounded-full bg-zinc-50 border px-4 text-[13px] mt-1"></div><div><label class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Keterangan</label><textarea x-model="editData.keterangan" rows="3" class="w-full rounded-[16px] bg-zinc-50 border p-3 text-[13px] mt-1"></textarea></div><button type="submit" class="w-full h-11 bg-zinc-900 text-white rounded-full text-[13px] font-bold">Update Produk</button></form></div></div>
 
-    <!-- BACKUP FOOTER -->
-    <div class="bg-white rounded-[16px] p-3 border flex gap-2"><button @click="exportData()" class="flex-1 py-2.5 rounded-full bg-zinc-900 text-white text-[11px] font-bold"><i class="fa-solid fa-download mr-1"></i> Export</button><label class="flex-1 py-2.5 rounded-full bg-zinc-50 border text-[11px] font-bold text-center cursor-pointer">Import<input type="file" hidden accept=".json" @change="importData($event)"></label></div>
+  <div class="bg-white rounded-[16px] p-3 border border-zinc-200 flex gap-2"><button @click="exportData()" class="flex-1 py-2.5 rounded-full bg-zinc-900 text-white text-[11px] font-bold"><i class="fa-solid fa-download mr-1"></i> Export Backup</button><label class="flex-1 py-2.5 rounded-full bg-zinc-50 border border-zinc-200 text-[11px] font-bold text-center cursor-pointer">Import<input type="file" hidden accept=".json" @change="importData($event)"></label></div>
 </div>
 
-<!-- PAGES LAIN -->
-<div id="p-walk" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">POS Sale</h2><p class="text-[12px] text-zinc-500">Dummy POS</p></div></div>
-<div id="p-cash" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">Cash</h2></div></div>
+<!-- OTHER PAGES SIMPLE -->
+<div id="p-incoming" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">Incoming - Barang Masuk</h2><p class="text-[12px] text-zinc-500 mt-2">Pilih produk inventory untuk tambah stok.</p><div class="mt-4 space-y-2"><template x-for="p in produks"><div class="flex justify-between items-center p-3 border rounded-full"><span class="text-[13px] font-bold" x-text="p.produk"></span><button @click="p.jumlah+=10;save();toast='Stok +10';setTimeout(()=>toast='',2000)" class="px-3 py-1 bg-zinc-900 text-white rounded-full text-[11px] font-bold">+10</button></div></template></div></div></div>
+<div id="p-outgoing" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">Outgoing - Barang Keluar</h2><div class="mt-4 space-y-2"><template x-for="p in produks"><div class="flex justify-between items-center p-3 border rounded-full"><span class="text-[13px] font-bold" x-text="p.produk"></span><button @click="p.jumlah=Math.max(0,p.jumlah-10);save();toast='Stok -10'" class="px-3 py-1 bg-red-500 text-white rounded-full text-[11px] font-bold">-10</button></div></template></div></div></div>
+<div id="p-walk" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">POS Sale</h2><p class="text-[12px] text-zinc-500">Segera</p></div></div>
+<div id="p-karyawan" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">Karyawan</h2><p class="text-[12px] text-zinc-500">Modul karyawan offline</p></div></div>
+<div id="p-cash" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">Cash</h2><p class="text-[12px] text-zinc-500">Rp 1.240.000 hari ini</p></div></div>
+<div id="p-tunggakan" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">Tunggakan</h2><p class="text-[12px] text-zinc-500">3 customer</p></div></div>
 <div id="p-lunara" class="page"><div class="bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-[20px] p-5 text-white"><h2 class="font-bold">Lunara</h2></div></div>
 <div id="p-generic" class="page"><div class="bg-white rounded-[20px] p-12 border text-center"><h3 class="font-bold" id="genericTitle">Modul</h3></div></div>
 
@@ -126,38 +109,31 @@
     <div class="grid grid-cols-5 h-[68px] max-w-[500px] mx-auto">
         <a @click="go('produk')" :class="currentPage==='produk'?'text-zinc-900':'text-zinc-400'" class="flex flex-col items-center justify-center gap-1 cursor-pointer"><i class="fa-solid fa-layer-group text-[17px]"></i><span class="text-[8px] font-bold tracking-widest">STOK</span></a>
         <a @click="go('walk')" :class="currentPage==='walk'?'text-zinc-900':'text-zinc-400'" class="flex flex-col items-center justify-center gap-1 cursor-pointer"><i class="fa-solid fa-bag-shopping text-[17px]"></i><span class="text-[8px] font-bold tracking-widest">POS</span></a>
-        <a @click="go('home')" class="flex flex-col items-center justify-center gap-1 cursor-pointer"><div class="w-12 h-12 rounded-[14px] grid place-items-center -mt-1" :class="currentPage==='home'?'bg-zinc-900 text-white':'bg-zinc-100 text-zinc-400 border'"><i class="fa-solid fa-house text-[16px]"></i></div><span class="text-[8px] font-bold tracking-widest" :class="currentPage==='home'?'text-zinc-900':'text-zinc-400'">HOME</span></a>
+        <a @click="go('home')" class="flex flex-col items-center justify-center gap-1 cursor-pointer"><div class="w-12 h-12 rounded-[14px] grid place-items-center -mt-1" :class="currentPage==='home'?'bg-zinc-900 text-white shadow':'bg-zinc-100 text-zinc-400 border'"><i class="fa-solid fa-house text-[16px]"></i></div><span class="text-[8px] font-bold tracking-widest" :class="currentPage==='home'?'text-zinc-900':'text-zinc-400'">HOME</span></a>
         <a @click="go('cash')" :class="currentPage==='cash'?'text-zinc-900':'text-zinc-400'" class="flex flex-col items-center justify-center gap-1 cursor-pointer"><i class="fa-solid fa-wallet text-[17px]"></i><span class="text-[8px] font-bold tracking-widest">CASH</span></a>
         <a @click="go('lunara')" :class="currentPage==='lunara'?'text-violet-600':'text-zinc-400'" class="flex flex-col items-center justify-center gap-1 cursor-pointer"><i class="fa-solid fa-wand-magic-sparkles text-[17px]"></i><span class="text-[8px] font-bold tracking-widest">LUNARA</span></a>
     </div>
+    <div class="h-[env(safe-area-inset-bottom)] bg-white"></div>
 </nav>
 
 <script>
-function inventoryApp(){
+function app(){
  return {
-  produks: [], openCreate:false, openEdit:false, editData:{}, form:{produk:'',jumlah:0,keterangan:''}, toast:'', currentPage:'home',
-  get nextKode(){ return String(Date.now()).slice(-6); },
-  get totalStok(){ return this.produks.reduce((a,b)=>a+(b.jumlah||0),0); },
-  init(){
-    let saved=localStorage.getItem('ribasa_produks');
-    if(saved){ this.produks=JSON.parse(saved); } else {
-      this.produks=[{id:1,kode_produk:'RB'+String(Date.now()).slice(-6),produk:'Whole Boiler 0.6-0.7',jumlah:3,keterangan:'fresh'},{id:2,kode_produk:'RB'+(Date.now()+1).toString().slice(-6),produk:'Ayam Kampung',jumlah:12,keterangan:'frozen'}];
-      this.save();
-    }
-    this.updateJam(); setInterval(()=>this.updateJam(),1000);
-  },
+  produks:[], openCreate:false, openEdit:false, editData:{}, form:{produk:'',jumlah:0,keterangan:''}, toast:'', currentPage:'home',
+  get nextKode(){ return 'RB'+String(Date.now()).slice(-6); },
+  get totalStok(){ return this.produks.reduce((a,b)=>a+(parseInt(b.jumlah)||0),0); },
+  init(){ let s=localStorage.getItem('ribasa_produks'); if(s){ this.produks=JSON.parse(s); } else { this.produks=[{id:1,kode_produk:'RB'+String(Date.now()).slice(-6),produk:'Whole Boiler 0.6-0.7',jumlah:12,keterangan:'fresh'},{id:2,kode_produk:'RB'+String(Date.now()+1).slice(-6),produk:'Ayam Kampung',jumlah:3,keterangan:'frozen'},{id:3,kode_produk:'RB'+String(Date.now()+2).slice(-6),produk:'Telur Ayam',jumlah:0,keterangan:'-'}]; this.save(); } this.updateJam(); setInterval(()=>this.updateJam(),1000); },
   updateJam(){ const el=document.getElementById('jamWIB'); if(!el) return; try{const s=new Date().toLocaleString('en-US',{timeZone:'Asia/Jakarta'});const d=new Date(s);el.textContent=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+' • '+d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})+' WIB';}catch(e){el.textContent=new Date().toLocaleString('id-ID')+' WIB';}},
   save(){ localStorage.setItem('ribasa_produks',JSON.stringify(this.produks)); },
-  go(name){ this.currentPage=name; document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); let id=name==='home'?'p-home':'p-'+name; let el=document.getElementById(id); if(!el){ el=document.getElementById('p-generic'); document.getElementById('genericTitle').innerText=name; } el.classList.add('active'); window.scrollTo(0,0); },
-  createProduk(){ const newP={id:Date.now(),kode_produk:'RB'+this.nextKode,produk:this.form.produk,jumlah:this.form.jumlah,keterangan:this.form.keterangan}; this.produks.unshift(newP); this.save(); this.form={produk:'',jumlah:0,keterangan:''}; this.openCreate=false; this.toast='Produk berhasil ditambahkan'; setTimeout(()=>this.toast='',3000); },
+  go(name){ this.currentPage=name; document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); let id=name==='home'?'p-home':'p-'+name; let el=document.getElementById(id)||document.getElementById('p-generic'); if(el.id==='p-generic') document.getElementById('genericTitle').innerText=name; el.classList.add('active'); window.scrollTo(0,0); },
+  createProduk(){ const nP={id:Date.now(),kode_produk:this.nextKode,produk:this.form.produk,jumlah:parseInt(this.form.jumlah)||0,keterangan:this.form.keterangan}; this.produks.unshift(nP); this.save(); this.form={produk:'',jumlah:0,keterangan:''}; this.openCreate=false; this.toast='Produk berhasil ditambahkan'; setTimeout(()=>this.toast='',3000); },
   openEditData(p){ this.editData={...p}; this.openEdit=true; },
   updateProduk(){ const idx=this.produks.findIndex(x=>x.id===this.editData.id); if(idx>=0){ this.produks[idx]={...this.editData}; this.save(); this.openEdit=false; this.toast='Produk berhasil diupdate'; setTimeout(()=>this.toast='',3000);} },
   hapus(id){ if(!confirm('Yakin hapus?')) return; this.produks=this.produks.filter(x=>x.id!==id); this.save(); this.toast='Produk dihapus'; setTimeout(()=>this.toast='',3000); },
   exportData(){ const data={}; for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); data[k]=localStorage.getItem(k);} const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`ribasa-backup-${new Date().toISOString().slice(0,10)}.json`; a.click(); },
-  importData(e){ const file=e.target.files[0]; if(!file) return; const r=new FileReader(); r.onload=ev=>{ try{ const d=JSON.parse(ev.target.result); Object.keys(d).forEach(k=>localStorage.setItem(k,d[k])); alert('Restore ok, reload'); location.reload(); }catch{ alert('File rusak'); } }; r.readAsText(file); }
+  importData(e){ const file=e.target.files[0]; if(!file) return; const r=new FileReader(); r.onload=ev=>{ try{ const d=JSON.parse(ev.target.result); Object.keys(d).forEach(k=>localStorage.setItem(k,d[k])); alert('Restore ok'); location.reload(); }catch{ alert('File rusak'); } }; r.readAsText(file); }
  }
 }
-document.addEventListener('DOMContentLoaded',()=>{ window.go=(n)=>{ const app=document.querySelector('[x-data]')._x_dataStack[0]; if(app) app.go(n); else { document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); let el=document.getElementById(n==='home'?'p-home':'p-'+n)||document.getElementById('p-generic'); el.classList.add('active'); } } });
 </script>
 </body>
 </html>
