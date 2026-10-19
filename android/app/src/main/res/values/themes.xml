@@ -1,5 +1,0 @@
-<resources>
-    <style name="Theme.Ribasa" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">#000000</item>
-    </style>
-</resources>

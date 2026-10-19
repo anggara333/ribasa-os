@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebSettings;
-
 public class MainActivity extends Activity {
     private WebView webView;
-    // GANTI URL INI KALO UDAH ADA HOSTING
     private static final String REMOTE_URL = "https://anggara333.github.io/ribasa-os/";
     private static final String LOCAL_URL = "file:///android_asset/index.html";
     @Override
@@ -25,7 +23,7 @@ public class MainActivity extends Activity {
                 if(url.equals(REMOTE_URL)) view.loadUrl(LOCAL_URL);
             }
         });
-        webView.loadUrl(LOCAL_URL);
+        webView.loadUrl(REMOTE_URL);
     }
     @Override
     public void onBackPressed() {
