@@ -7,8 +7,9 @@ import android.webkit.WebSettings;
 
 public class MainActivity extends Activity {
     private WebView webView;
-    private static final String URL = "http://10.0.2.2:8000";
-
+    // GANTI URL INI KALO UDAH ADA HOSTING
+    private static final String REMOTE_URL = "https://anggara333.github.io/ribasa-os/";
+    private static final String LOCAL_URL = "file:///android_asset/index.html";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,8 +18,14 @@ public class MainActivity extends Activity {
         WebSettings s = webView.getSettings();
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(URL);
+        s.setAllowFileAccess(true);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onReceivedError(WebView view, int code, String desc, String url){
+                if(url.equals(REMOTE_URL)) view.loadUrl(LOCAL_URL);
+            }
+        });
+        webView.loadUrl(LOCAL_URL);
     }
     @Override
     public void onBackPressed() {
