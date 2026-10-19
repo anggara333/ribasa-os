@@ -1,151 +1,186 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="h-full">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ribasa Chicken</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Dashboard - Ribasa</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<script>tailwind.config={theme:{extend:{colors:{navy:'#102542',cream:'#FDF6E3',borderC:'#EAE0D5'}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>*{font-family:'Plus Jakarta Sans',sans-serif}.font-mono{font-family:'JetBrains Mono',monospace!important}
-#chicken{display:inline-block;animation:chickenWalk 1.4s ease-in-out infinite;transform-origin:50% 90%}
-@keyframes chickenWalk{0%{transform:translateY(0) rotate(-6deg) scaleX(1)}20%{transform:translateY(-3px) rotate(4deg) scaleX(1)}40%{transform:translateY(0) rotate(-5deg) scaleX(1)}50%{transform:translateY(0) rotate(-5deg) scaleX(-1)}70%{transform:translateY(-3px) rotate(4deg) scaleX(-1)}90%{transform:translateY(0) rotate(-6deg) scaleX(-1)}100%{transform:translateY(0) rotate(-6deg) scaleX(1)}}
-.nav-link{transition:all .2s}.nav-link:hover i{transform:translateX(2px) scale(1.15) rotate(3deg);color:#FBBF24}
-.nav-link.active{background:white;color:#102542;font-weight:bold;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.nav-link.active i{color:#102542}
-.content-section{display:none}.content-section.active{display:block}
+.page{display:none}.page.active{display:block}
+.nav-bottom.active{color:#18181b!important}.nav-bottom.active div{background:#18181b!important;color:white!important}
+.nav-side.active{background:white!important;color:#18181b!important}
 </style>
 </head>
-<body class="bg-cream text-navy antialiased">
-<div class="flex min-h-screen">
-<!-- SIDEBAR DESKTOP -->
-<aside class="w-[280px] bg-navy text-slate-300 flex flex-col border-r border-white/10 fixed h-full z-20 hidden lg:flex">
-  <div class="h-[64px] px-6 flex items-center justify-between border-b border-white/10 shrink-0">
-    <div class="flex items-center gap-3">
-      <div class="w-9 h-9 bg-amber-400 rounded-xl grid place-items-center shadow-[0_0_15px_rgba(251,191,36,.3)]"><span id="chicken" class="text-[20px]">🐓</span></div>
-      <div><p class="text-white font-extrabold leading-none text-[15px]">RIBASA</p><p class="text-[10px] tracking-[0.2em] text-amber-200/60 font-mono font-bold">CHICKEN SYSTEM</p></div>
+<body class="h-full bg-[#F5F5F0] text-zinc-900 antialiased">
+
+<!-- CONTENT WRAPPER -->
+<main class="p-4 max-w-[800px] mx-auto w-full pb-[88px] lg:pb-8 lg:pl-[280px]">
+
+<!-- ===== DASHBOARD PAGE ===== -->
+<div id="p-home" class="page active space-y-4">
+  <div class="bg-zinc-900 rounded-[20px] p-5 text-white relative overflow-hidden">
+    <div class="absolute -top-20 -right-20 w-60 h-60 bg-amber-400/20 rounded-full blur-[40px]"></div>
+    <div class="relative z-10">
+      <div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest"><span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> LIVE • 2026</div>
+      <h1 class="text-[20px] font-extrabold mt-3">Ribasa Chicken OS</h1>
+      <p id="jamWIB" class="text-white/50 text-[11px] font-mono mt-1">Loading...</p>
     </div>
   </div>
-  <div class="flex-1 overflow-y-auto py-5 px-3 space-y-6">
-    <a onclick="showPage('dashboard')" id="m-dashboard" class="nav-link active flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] cursor-pointer"><i class="fa-solid fa-table-columns w-4"></i> Dashboard</a>
 
-    <div>
-      <p class="px-3 mb-2 text-[10px] font-bold tracking-widest text-white/30 flex items-center gap-2"><i class="fa-solid fa-shield-halved text-[9px]"></i> MANAJEMEN USER</p>
-      <div class="ml-1 pl-5 border-l border-white/10 space-y-0.5">
-        <a onclick="showPage('karyawan')" id="m-karyawan" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-id-badge w-4 text-[11px]"></i> Karyawan</a>
-        <a onclick="showPage('customer')" id="m-customer" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-shop w-4 text-[11px]"></i> Customer</a>
-        <a onclick="showPage('role')" id="m-role" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-key w-4 text-[11px]"></i> Role & Permission</a>
-      </div>
+  <div class="bg-white rounded-[20px] p-4 border border-zinc-200">
+    <p class="text-[9px] font-bold tracking-[0.2em] text-zinc-400 mb-3">MENU CEPAT</p>
+    <div class="grid grid-cols-4 gap-3">
+      <a onclick="go('produk')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-amber-400 grid place-items-center text-zinc-900"><i class="fa-solid fa-layer-group"></i></div><span class="text-[10px] font-bold">Inventory</span></a>
+      <a onclick="go('incoming')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-zinc-900 text-white grid place-items-center"><i class="fa-solid fa-box-open"></i></div><span class="text-[10px] font-bold">Masuk</span></a>
+      <a onclick="go('outgoing')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-white border border-zinc-200 grid place-items-center"><i class="fa-solid fa-truck-fast"></i></div><span class="text-[10px] font-bold">Keluar</span></a>
+      <a onclick="go('walk')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-emerald-500 text-white grid place-items-center"><i class="fa-solid fa-bag-shopping"></i></div><span class="text-[10px] font-bold">POS Sale</span></a>
+      <a onclick="go('karyawan')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-violet-100 text-violet-600 grid place-items-center"><i class="fa-solid fa-id-badge"></i></div><span class="text-[10px] font-bold">Karyawan</span></a>
+      <a onclick="go('cash')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-emerald-50 border text-emerald-600 grid place-items-center"><i class="fa-solid fa-wallet"></i></div><span class="text-[10px] font-bold">Cash</span></a>
+      <a onclick="go('tunggakan')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-red-50 border text-red-600 grid place-items-center"><i class="fa-solid fa-triangle-exclamation"></i></div><span class="text-[10px] font-bold">Tunggakan</span></a>
+      <a onclick="go('lunara')" class="flex flex-col items-center gap-2 cursor-pointer"><div class="w-[52px] h-[52px] rounded-[16px] bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white grid place-items-center"><i class="fa-solid fa-wand-magic-sparkles"></i></div><span class="text-[10px] font-bold">Lunara</span></a>
     </div>
+  </div>
 
-    <div>
-      <p class="px-3 mb-2 text-[10px] font-bold tracking-widest text-white/30 flex items-center gap-2"><i class="fa-solid fa-boxes-stacked text-[9px]"></i> OPERASIONAL</p>
-      <div class="ml-1 pl-5 border-l border-amber-400/20 space-y-0.5">
-        <a onclick="showPage('produk')" id="m-produk" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-layer-group w-4 text-[11px]"></i> Inventory</a>
-        <a onclick="showPage('incoming')" id="m-incoming" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-box-open w-4 text-[11px]"></i> Incoming</a>
-        <a onclick="showPage('outgoing')" id="m-outgoing" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-truck-fast w-4 text-[11px]"></i> Outgoing</a>
-        <a onclick="showPage('walk')" id="m-walk" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-bag-shopping w-4 text-[11px]"></i> Walk In Sale <span class="ml-auto text-[8px] bg-amber-400 text-navy px-1.5 py-0.5 rounded-full font-bold animate-pulse">POS</span></a>
-        <a onclick="showPage('laporan')" id="m-laporan" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-chart-line w-4 text-[11px]"></i> Daily Report</a>
-      </div>
+  <div class="grid grid-cols-2 gap-3">
+    <div class="bg-white rounded-[18px] p-4 border border-zinc-200"><p class="text-[9px] font-bold tracking-widest text-zinc-400">CASHFLOW HARI INI</p><p class="text-[16px] font-black font-mono mt-2 text-emerald-600">Rp 1.240.000</p></div>
+    <div class="bg-zinc-900 rounded-[18px] p-4 text-white"><p class="text-[9px] font-bold tracking-widest text-white/50">LABA BULAN INI</p><p class="text-[16px] font-black font-mono mt-2 text-amber-300">Rp 4.820.000</p></div>
+    <div class="bg-white rounded-[18px] p-4 border border-zinc-200"><p class="text-[9px] font-bold tracking-widest text-zinc-400">PIUTANG</p><p class="text-[16px] font-black font-mono mt-2">Rp 2.400.000</p><p class="text-[10px] text-zinc-500 mt-1">3 org</p></div>
+    <div class="bg-white rounded-[18px] p-4 border border-zinc-200"><p class="text-[9px] font-bold tracking-widest text-zinc-400">STOK</p><p class="text-[16px] font-black mt-2">1.240 pcs</p><p class="text-[9px] mt-2"><span class="bg-red-50 text-red-600 px-2 py-0.5 rounded-full font-bold">TIPIS 5</span></p></div>
+  </div>
+
+  <div class="bg-white rounded-[18px] p-4 border border-zinc-200">
+    <h3 class="font-bold text-[12px]">Laba 12 Bulan</h3>
+    <div class="flex items-end gap-1 h-28 mt-4">
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:40%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:70%"></div></div><p class="text-[7px] font-bold text-zinc-500">Jan</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:55%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:80%"></div></div><p class="text-[7px] font-bold text-zinc-500">Feb</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:65%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:90%"></div></div><p class="text-[7px] font-bold text-zinc-500">Mar</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:30%"></div><div class="w-full max-w-[10px] bg-red-500 rounded-t-[4px]" style="height:20%"></div></div><p class="text-[7px] font-bold text-zinc-500">Apr</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:75%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:95%"></div></div><p class="text-[7px] font-bold text-zinc-500">Mei</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:50%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:85%"></div></div><p class="text-[7px] font-bold text-zinc-500">Jun</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:60%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:78%"></div></div><p class="text-[7px] font-bold text-zinc-500">Jul</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:45%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:68%"></div></div><p class="text-[7px] font-bold text-zinc-500">Agu</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:70%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:88%"></div></div><p class="text-[7px] font-bold text-zinc-500">Sep</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:55%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:72%"></div></div><p class="text-[7px] font-bold text-zinc-500">Okt</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:35%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:65%"></div></div><p class="text-[7px] font-bold text-zinc-500">Nov</p></div>
+      <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full flex gap-[2px] items-end justify-center h-[80px]"><div class="w-full max-w-[10px] bg-zinc-100 border rounded-t-[4px]" style="height:80%"></div><div class="w-full max-w-[10px] bg-zinc-900 rounded-t-[4px]" style="height:98%"></div></div><p class="text-[7px] font-bold text-zinc-500">Des</p></div>
     </div>
+  </div>
 
-    <div>
-      <p class="px-3 mb-2 text-[10px] font-bold tracking-widest text-white/30 flex items-center gap-2"><i class="fa-solid fa-coins text-[9px]"></i> KEUANGAN</p>
-      <div class="ml-1 pl-5 border-l border-white/10 space-y-0.5">
-        <a onclick="showPage('cash')" id="m-cash" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-money-bill-wave w-4 text-[11px]"></i> Cash</a>
-        <a onclick="showPage('debit')" id="m-debit" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-credit-card w-4 text-[11px]"></i> Debit</a>
-        <a onclick="showPage('tunggakan')" id="m-tunggakan" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-triangle-exclamation w-4 text-[11px]"></i> Tunggakan</a>
-        <a onclick="showPage('pengeluaran')" id="m-pengeluaran" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-400 hover:text-amber-300 hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-receipt w-4 text-[11px]"></i> Biaya Operasional</a>
-      </div>
+  <div class="bg-white rounded-[18px] p-4 border border-zinc-200">
+    <div class="flex justify-between items-center"><h3 class="font-bold text-[12px]">Stok Menipis</h3><a onclick="go('produk')" class="text-[10px] font-bold px-3 py-1 bg-zinc-900 text-white rounded-full cursor-pointer">Lihat</a></div>
+    <div class="mt-2">
+      <div class="flex justify-between items-center py-3 border-b border-zinc-100"><span class="text-[13px]">Ayam Broiler 1kg</span><span class="bg-zinc-900 text-amber-300 px-2.5 py-1 rounded-full text-[11px] font-mono font-bold">3</span></div>
+      <div class="flex justify-between items-center py-3 border-b border-zinc-100"><span class="text-[13px]">Ayam Kampung</span><span class="bg-zinc-900 text-amber-300 px-2.5 py-1 rounded-full text-[11px] font-mono font-bold">2</span></div>
+      <div class="flex justify-between items-center py-3"><span class="text-[13px]">Telur Ayam 1kg</span><span class="bg-red-500 text-white px-2.5 py-1 rounded-full text-[11px] font-mono font-bold">0</span></div>
     </div>
-    <a onclick="showPage('lunara')" id="m-lunara" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-bold text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"><i class="fa-solid fa-wand-magic-sparkles w-4"></i> Lunara</a>
   </div>
-  <div class="p-4 border-t border-white/10">
-    <div class="bg-white/[0.06] rounded-2xl p-3 flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=12" class="w-9 h-9 rounded-full"><div class="flex-1 min-w-0"><p class="text-white text-[13px] font-bold truncate flex items-center gap-2">Admin Ribasa <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span></p><p class="text-[11px] text-amber-200/60 font-mono">Super Admin</p></div></div>
-  </div>
-</aside>
 
-<!-- MAIN -->
-<div class="flex-1 lg:pl-[280px] min-h-screen flex flex-col">
-<header class="h-[64px] bg-white/90 backdrop-blur-xl border-b border-borderC sticky top-0 z-10 flex items-center justify-between px-4 lg:px-8">
-  <div class="flex items-center gap-3">
-    <button onclick="toggleMobile()" class="lg:hidden w-9 h-9 rounded-full bg-cream border border-borderC grid place-items-center"><i class="fa-solid fa-bars text-[13px]"></i></button>
-    <h1 id="pageTitle" class="font-extrabold text-[15px] tracking-tight">Dashboard</h1><span class="hidden md:inline-flex ml-2 text-[10px] bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded-full font-mono font-bold">LIVE v4 • APK</span>
-  </div>
-  <div class="flex items-center gap-2"><span class="flex items-center gap-2 text-[11px] font-mono bg-cream border border-borderC px-3 py-1.5 rounded-full"><span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> SYNC OK</span></div>
-</header>
-
-<!-- MOBILE SIDEBAR OVERLAY -->
-<div id="mobileOverlay" onclick="toggleMobile()" class="fixed inset-0 bg-navy/40 backdrop-blur-sm z-30 hidden"></div>
-<div id="mobileSidebar" class="fixed left-0 top-0 h-full w-[280px] bg-navy z-40 flex flex-col -translate-x-full transition-transform duration-300 lg:hidden">
-  <div class="h-[64px] px-6 flex items-center justify-between border-b border-white/10"><div class="flex items-center gap-3"><div class="w-9 h-9 bg-amber-400 rounded-xl grid place-items-center"><span class="text-[20px]">🐓</span></div><div><p class="text-white font-extrabold leading-none text-[15px]">RIBASA</p><p class="text-[10px] tracking-[0.2em] text-amber-200/60 font-mono font-bold">CHICKEN SYSTEM</p></div></div><button onclick="toggleMobile()" class="w-8 h-8 rounded-full bg-white/10 grid place-items-center"><i class="fa-solid fa-xmark text-[11px] text-white"></i></button></div>
-  <div class="flex-1 overflow-auto py-5 px-3 space-y-2">
-    <a onclick="showPage('dashboard');toggleMobile()" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-bold bg-white text-navy">Dashboard</a>
-    <a onclick="showPage('karyawan');toggleMobile()" class="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-300">Karyawan</a>
-    <a onclick="showPage('customer');toggleMobile()" class="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-300">Customer</a>
-    <a onclick="showPage('produk');toggleMobile()" class="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-300">Inventory</a>
-    <a onclick="showPage('walk');toggleMobile()" class="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-300">Walk In Sale</a>
-    <a onclick="showPage('cash');toggleMobile()" class="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-300">Cash</a>
-    <a onclick="showPage('lunara');toggleMobile()" class="flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-slate-300">Lunara</a>
+  <!-- BACKUP SECTION -->
+  <div class="bg-white rounded-[18px] p-4 border border-zinc-200">
+    <p class="text-[10px] font-bold tracking-widest text-zinc-400 mb-2">BACKUP DATA</p>
+    <div class="grid grid-cols-2 gap-2">
+      <button onclick="exportData()" class="py-3 rounded-xl bg-zinc-900 text-white text-[12px] font-bold"><i class="fa-solid fa-download mr-1"></i> Export Backup</button>
+      <label class="py-3 rounded-xl bg-cream border border-zinc-200 text-[12px] font-bold text-center cursor-pointer"><i class="fa-solid fa-upload mr-1"></i> Import Backup<input type="file" id="importFile" accept=".json" hidden onchange="importData(this.files[0])"></label>
+    </div>
+    <p class="text-[10px] text-zinc-400 mt-2 font-mono text-center">Ganti HP? Export dulu, kirim via WA, import di HP baru.</p>
   </div>
 </div>
 
-<main class="p-4 lg:p-8 flex-1">
-<!-- DASHBOARD -->
-<div id="page-dashboard" class="content-section active space-y-5">
-  <div class="relative overflow-hidden bg-zinc-900 rounded-[28px] p-7 text-white"><div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-400/20 rounded-full blur-[60px]"></div><div class="relative"><div class="inline-flex items-center gap-2 bg-white/10 border border-white/10 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.18em]"><span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> LIVE SYSTEM • 2026</div><h1 class="text-[26px] font-extrabold mt-3">Dashboard Ribasa Chicken</h1><p id="jamWIB" class="text-white/60 text-[11px] mt-2 font-mono"></p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-white text-zinc-900 px-3.5 py-1.5 rounded-full text-[11px] font-bold">Cashflow + Rp 1.240k hari ini</span><span class="bg-white/10 border border-white/10 px-3.5 py-1.5 rounded-full text-[11px] font-mono text-white/80">Masuk Rp 3.400k • Keluar Rp 2.160k</span></div></div></div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-    <div class="bg-white rounded-[20px] p-5 border border-zinc-200 shadow-sm"><p class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Cashflow Hari Ini</p><p class="text-[22px] font-black mt-1 font-mono text-emerald-600">Rp 1.240.000</p><p class="text-[11px] text-zinc-500 mt-2 font-mono">Masuk 3.400k • Keluar 2.160k</p></div>
-    <div class="bg-white rounded-[20px] p-5 border border-zinc-200 shadow-sm border-l-4 border-l-amber-400"><p class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">Total Belanja</p><p class="text-[22px] font-black mt-1 font-mono">Rp 12.400.000</p></div>
-    <div class="bg-zinc-900 rounded-[20px] p-5 text-white"><p class="text-[10px] uppercase font-bold text-white/50">Stok Gudang</p><p class="text-[20px] font-bold mt-3">1.240 pcs • 48 SKU</p><div class="mt-4 grid grid-cols-2 gap-2 text-center"><div class="bg-red-50 border border-red-200 rounded-xl p-3"><p class="text-[10px] font-bold text-red-500">TIPIS</p><p class="text-[20px] font-black text-red-600">5</p></div><div class="bg-zinc-50 border border-zinc-200 rounded-xl p-3"><p class="text-[10px] font-bold text-zinc-500">HABIS</p><p class="text-[20px] font-black text-zinc-900">2</p></div></div></div>
-  </div>
-  <div class="bg-white rounded-[20px] p-5 border border-zinc-200">
-    <div class="flex justify-between"><h3 class="font-bold text-[14px]">Laba 12 Bulan</h3><span class="text-[10px] bg-zinc-900 text-white px-2.5 py-1 rounded-full">2026</span></div>
-    <div class="flex items-end gap-1.5 h-32 mt-6">
-      <div class="flex-1 bg-zinc-100 border rounded-t-md h-[40%]"></div><div class="flex-1 bg-zinc-900 rounded-t-md h-[70%]"></div>
-      <div class="flex-1 bg-zinc-100 border rounded-t-md h-[55%]"></div><div class="flex-1 bg-zinc-900 rounded-t-md h-[80%]"></div>
-      <div class="flex-1 bg-zinc-100 border rounded-t-md h-[65%]"></div><div class="flex-1 bg-zinc-900 rounded-t-md h-[90%]"></div>
-      <div class="flex-1 bg-zinc-100 border rounded-t-md h-[30%]"></div><div class="flex-1 bg-zinc-900 rounded-t-md h-[60%]"></div>
-      <div class="flex-1 bg-zinc-100 border rounded-t-md h-[75%]"></div><div class="flex-1 bg-zinc-900 rounded-t-md h-[95%]"></div>
-      <div class="flex-1 bg-zinc-100 border rounded-t-md h-[50%]"></div><div class="flex-1 bg-zinc-900 rounded-t-md h-[85%]"></div>
-    </div>
-    <div class="flex justify-between mt-2 text-[10px] font-mono text-zinc-400"><span>Jan</span><span>Jun</span><span>Dec</span></div>
-  </div>
-</div>
-
-<!-- OTHER PAGES TEMPLATE -->
-<div id="page-karyawan" class="content-section"><div class="bg-white rounded-[20px] p-6 border"><h2 class="font-bold text-lg"><i class="fa-solid fa-id-badge mr-2"></i> Karyawan</h2><p class="text-[13px] text-zinc-500 mt-2">Data karyawan Ribasa. Di versi APK offline ini preview, untuk CRUD real hubungkan ke server Laravel.</p><div class="mt-4 grid grid-cols-1 gap-2"><div class="p-3 bg-cream border rounded-xl flex justify-between"><span class="font-bold text-[13px]">Budi Santoso</span><span class="text-[11px] bg-zinc-900 text-white px-2 py-1 rounded-full">Kasir</span></div><div class="p-3 bg-cream border rounded-xl flex justify-between"><span class="font-bold text-[13px]">Siti Aminah</span><span class="text-[11px] bg-amber-400 text-navy px-2 py-1 rounded-full">Gudang</span></div></div></div></div>
-<div id="page-customer" class="content-section"><div class="bg-white rounded-[20px] p-6 border"><h2 class="font-bold text-lg"><i class="fa-solid fa-shop mr-2"></i> Customer</h2><p class="text-[13px] text-zinc-500 mt-2">Daftar customer / pelanggan.</p><div class="mt-4 p-3 bg-emerald-50 border border-emerald-200 rounded-xl"><p class="text-[13px] font-bold">Warung Ayam Pak Haji</p><p class="text-[11px] text-zinc-500 font-mono">Piutang Rp 2.400.000</p></div></div></div>
-<div id="page-produk" class="content-section"><div class="bg-white rounded-[20px] p-6 border"><h2 class="font-bold text-lg"><i class="fa-solid fa-layer-group mr-2"></i> Inventory - Stok Gudang</h2><div class="mt-4 space-y-2"><div class="flex justify-between items-center py-3 px-4 rounded-full bg-zinc-50 border"><span class="text-[13px]">Ayam Broiler 1kg</span><span class="bg-zinc-900 text-amber-300 px-3 py-1 rounded-full text-[11px] font-mono">120 pcs</span></div><div class="flex justify-between items-center py-3 px-4 rounded-full bg-red-50 border border-red-200"><span class="text-[13px]">Ayam Kampung</span><span class="bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-mono">3 pcs - TIPIS</span></div></div></div></div>
-<div id="page-walk" class="content-section"><div class="bg-white rounded-[20px] p-6 border"><h2 class="font-bold text-lg">🛒 Walk In Sale - POS</h2><div class="mt-4 bg-navy text-white rounded-[16px] p-5"><p class="text-[11px] text-white/50 tracking-widest">TOTAL BAYAR</p><p class="text-[28px] font-black font-mono text-amber-300">Rp 85.000</p><button class="mt-3 w-full py-3 bg-amber-400 text-navy rounded-xl font-bold">Bayar Cash</button></div></div></div>
-<div id="page-cash" class="content-section"><div class="bg-white rounded-[20px] p-6 border"><h2 class="font-bold text-lg">💵 Cash</h2><p class="text-[13px] text-zinc-500">Laporan cash harian.</p><div class="mt-4 bg-emerald-50 border border-emerald-200 rounded-xl p-4"><p class="font-mono font-black text-emerald-700">Rp 1.240.000 masuk hari ini</p></div></div></div>
-<div id="page-lunara" class="content-section"><div class="bg-violet-50 border border-violet-200 rounded-[20px] p-6"><h2 class="font-bold text-lg text-violet-700"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Lunara</h2><p class="text-[13px] text-violet-600/70 mt-2">Modul Lunara Total: Rp 8.400.000</p></div></div>
-<div id="page-generic" class="content-section"><div class="bg-white rounded-[20px] p-12 border text-center"><div class="w-12 h-12 bg-cream border rounded-full mx-auto grid place-items-center"><i class="fa-solid fa-hammer"></i></div><h3 class="font-bold mt-3" id="genericTitle">Modul</h3><p class="text-[12px] text-zinc-500 mt-2">Modul ini butuh koneksi ke server Laravel asli.<br>Tap hubungkan server.</p><button onclick="setURL()" class="mt-4 px-5 py-2.5 bg-navy text-white rounded-full text-[13px] font-bold">Hubungkan Server</button></div></div>
+<!-- OTHER PAGES -->
+<div id="p-produk" class="page space-y-4"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold"><i class="fa-solid fa-layer-group mr-2"></i>Stok - Inventory</h2><p class="text-[12px] text-zinc-500 mt-1">Offline CRUD - data kesimpen di HP</p><div id="listProduk" class="mt-4 space-y-2"></div><button onclick="addProduk()" class="mt-3 w-full py-3 bg-zinc-900 text-white rounded-xl font-bold text-[13px]">+ Tambah Produk</button></div></div>
+<div id="p-walk" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">POS - Walk In Sale</h2><div class="mt-4 bg-zinc-900 rounded-[16px] p-5 text-white"><p class="text-[10px] text-white/50">TOTAL</p><p class="text-[28px] font-black font-mono text-amber-300" id="posTotal">Rp 0</p><button onclick="bayar()" class="mt-3 w-full py-3 bg-amber-400 text-zinc-900 rounded-xl font-bold">Bayar Cash</button></div></div></div>
+<div id="p-cash" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">Cash</h2><div class="mt-4 bg-emerald-50 border border-emerald-200 rounded-xl p-4"><p class="font-mono font-black text-emerald-700">Rp 1.240.000 masuk hari ini</p></div></div></div>
+<div id="p-lunara" class="page"><div class="bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-[20px] p-5 text-white"><h2 class="font-bold"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Lunara</h2><p class="text-[13px] mt-2 text-white/80">Total: Rp 8.400.000</p></div></div>
+<div id="p-karyawan" class="page"><div class="bg-white rounded-[20px] p-5 border"><h2 class="font-bold">Karyawan</h2><div class="mt-3 p-3 bg-zinc-50 rounded-xl flex justify-between"><span class="text-[13px] font-bold">Budi - Kasir</span><span class="text-[10px] bg-emerald-500 text-white px-2 py-1 rounded-full">Aktif</span></div></div></div>
+<div id="p-generic" class="page"><div class="bg-white rounded-[20px] p-12 border text-center"><div class="w-12 h-12 bg-zinc-100 rounded-full mx-auto grid place-items-center"><i class="fa-solid fa-hammer"></i></div><h3 class="font-bold mt-3" id="genericTitle">Modul</h3><p class="text-[12px] text-zinc-500 mt-2">Versi APK offline. Hubungkan ke server Laravel untuk data real.</p></div></div>
 
 </main>
-<footer class="mt-auto border-t border-borderC bg-white px-4 lg:px-8 py-5 flex justify-between"><p class="text-[11px] font-bold">RIBASA CHICKEN SYSTEM <span class="font-mono font-normal text-[10px] text-zinc-400">v1.0.4 • APK FULL MENU</span></p><span id="autoCity" class="text-[11px] font-mono text-zinc-500"><i class="fa-solid fa-location-dot text-emerald-500 animate-pulse"></i> Bandar Lampung</span></footer>
-<div class="h-1 w-full bg-gradient-to-r from-navy via-amber-400 to-emerald-500"></div>
-</div>
-</div>
+
+<!-- BOTTOM NAV - MOBILE (exact dari template lu) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white border-t border-zinc-200 lg:hidden">
+    <div class="grid grid-cols-5 h-[68px] max-w-[500px] mx-auto">
+        <a onclick="go('produk')" id="b-produk" class="nav-bottom flex flex-col items-center justify-center gap-1 text-zinc-400 cursor-pointer">
+            <i class="fa-solid fa-layer-group text-[17px]"></i><span class="text-[8px] font-bold tracking-widest">STOK</span>
+        </a>
+        <a onclick="go('walk')" id="b-walk" class="nav-bottom flex flex-col items-center justify-center gap-1 text-zinc-400 cursor-pointer">
+            <i class="fa-solid fa-bag-shopping text-[17px]"></i><span class="text-[8px] font-bold tracking-widest">POS</span>
+        </a>
+        <a onclick="go('home')" id="b-home" class="nav-bottom active flex flex-col items-center justify-center gap-1 cursor-pointer">
+            <div class="w-12 h-12 rounded-[14px] grid place-items-center -mt-1 bg-zinc-900 text-white"><i class="fa-solid fa-house text-[16px]"></i></div>
+            <span class="text-[8px] font-bold tracking-widest">HOME</span>
+        </a>
+        <a onclick="go('cash')" id="b-cash" class="nav-bottom flex flex-col items-center justify-center gap-1 text-zinc-400 cursor-pointer">
+            <i class="fa-solid fa-wallet text-[17px]"></i><span class="text-[8px] font-bold tracking-widest">CASH</span>
+        </a>
+        <a onclick="go('lunara')" id="b-lunara" class="nav-bottom flex flex-col items-center justify-center gap-1 text-zinc-400 cursor-pointer">
+            <i class="fa-solid fa-wand-magic-sparkles text-[17px]"></i><span class="text-[8px] font-bold tracking-widest">LUNARA</span>
+        </a>
+    </div>
+    <div class="h-[env(safe-area-inset-bottom)] bg-white"></div>
+</nav>
+
+<!-- SIDEBAR DESKTOP -->
+<aside class="hidden lg:flex fixed left-0 top-0 h-full w-[240px] bg-zinc-900 text-white/60 p-4 flex-col z-30">
+    <div class="p-2 font-black text-white tracking-tight">RIBASA OS</div>
+    <div class="mt-6 space-y-1">
+        <a onclick="go('home')" id="s-home" class="nav-side active flex gap-3 px-3 py-2.5 rounded-xl text-[13px] font-bold cursor-pointer"><i class="fa-solid fa-house w-4"></i> Home</a>
+        <a onclick="go('produk')" id="s-produk" class="nav-side flex gap-3 px-3 py-2.5 rounded-xl text-[13px] font-bold hover:bg-white/10 hover:text-white cursor-pointer"><i class="fa-solid fa-layer-group w-4"></i> Stok</a>
+        <a onclick="go('walk')" id="s-walk" class="nav-side flex gap-3 px-3 py-2.5 rounded-xl text-[13px] font-bold hover:bg-white/10 hover:text-white cursor-pointer"><i class="fa-solid fa-bag-shopping w-4"></i> POS</a>
+        <a onclick="go('cash')" id="s-cash" class="nav-side flex gap-3 px-3 py-2.5 rounded-xl text-[13px] font-bold hover:bg-white/10 hover:text-white cursor-pointer"><i class="fa-solid fa-wallet w-4"></i> Cash</a>
+        <a onclick="go('lunara')" id="s-lunara" class="nav-side flex gap-3 px-3 py-2.5 rounded-xl text-[13px] font-bold hover:bg-white/10 hover:text-white cursor-pointer"><i class="fa-solid fa-wand-magic-sparkles w-4"></i> Lunara</a>
+    </div>
+    <div class="mt-auto p-3 bg-white/5 rounded-xl"><p class="text-[11px] text-white font-bold">Backup Data?</p><button onclick="exportData()" class="mt-2 w-full py-2 bg-white text-zinc-900 rounded-lg text-[11px] font-bold">Export JSON</button></div>
+</aside>
+
 <script>
-function showPage(name){
-  document.querySelectorAll('.content-section').forEach(e=>e.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(e=>e.classList.remove('active'));
-  let id='page-'+name;
-  let page=document.getElementById(id);
-  if(!page){page=document.getElementById('page-generic');document.getElementById('genericTitle').innerText=name.charAt(0).toUpperCase()+name.slice(1);}
-  page.classList.add('active');
-  let menu=document.getElementById('m-'+name);
-  if(menu) menu.classList.add('active');
-  document.getElementById('pageTitle').innerText=name.charAt(0).toUpperCase()+name.slice(1);
+// JAM WIB
+function updateJamWIB(){
+  const el=document.getElementById('jamWIB'); if(!el) return;
+  try{const s=new Date().toLocaleString('en-US',{timeZone:'Asia/Jakarta'});const d=new Date(s);el.textContent=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+' • '+d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})+' WIB';}catch(e){const d=new Date();el.textContent=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+' • '+d.toLocaleTimeString('id-ID')+' WIB';}
+}
+updateJamWIB(); setInterval(updateJamWIB,1000);
+
+// NAVIGASI
+function go(name){
+  if(name==='home') name='home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-bottom').forEach(p=>{p.classList.remove('active');p.classList.add('text-zinc-400')});
+  document.querySelectorAll('.nav-side').forEach(p=>p.classList.remove('active'));
+  let pid = document.getElementById('p-'+name);
+  if(!pid){ pid=document.getElementById('p-generic'); document.getElementById('genericTitle').innerText=name; }
+  pid.classList.add('active');
+  let b=document.getElementById('b-'+name); if(b){b.classList.add('active'); b.classList.remove('text-zinc-400')}
+  let s=document.getElementById('s-'+name); if(s) s.classList.add('active');
   window.scrollTo(0,0);
 }
-function toggleMobile(){
-  let sb=document.getElementById('mobileSidebar'); let ov=document.getElementById('mobileOverlay');
-  if(sb.classList.contains('-translate-x-full')){sb.classList.remove('-translate-x-full');ov.classList.remove('hidden');}else{sb.classList.add('-translate-x-full');ov.classList.add('hidden');}
+
+// PRODUK CRUD OFFLINE
+function loadProduk(){
+  let data = JSON.parse(localStorage.getItem('produk')||'[{"nama":"Ayam Broiler 1kg","stok":3},{"nama":"Ayam Kampung","stok":2},{"nama":"Telur Ayam 1kg","stok":0}]');
+  let html=''; data.forEach((p,i)=>{ html+=`<div class="flex justify-between items-center py-3 px-4 rounded-full bg-zinc-50 border"><span class="text-[13px]">${p.nama}</span><span class="bg-zinc-900 text-amber-300 px-2.5 py-1 rounded-full text-[11px] font-mono font-bold">${p.stok}</span></div>`; });
+  let el=document.getElementById('listProduk'); if(el) el.innerHTML=html;
 }
-function updateJam(){try{const n=new Date().toLocaleString('en-US',{timeZone:'Asia/Jakarta'});const d=new Date(n);let el=document.getElementById('jamWIB');if(el)el.textContent=d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Jakarta'})+' • '+d.toLocaleTimeString('id-ID',{hour12:false,timeZone:'Asia/Jakarta'})+' WIB';}catch{}}updateJam();setInterval(updateJam,1000);
-function setURL(){let u=prompt('URL Laravel, contoh https://ribasa.my.id');if(u){localStorage.setItem('ribasa_url',u); if(confirm('Buka '+u+' ?')) location.href=u;}}
-if(navigator.geolocation){navigator.geolocation.getCurrentPosition(async pos=>{try{let lat=pos.coords.latitude,lon=pos.coords.longitude;let r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=10`,{headers:{'Accept-Language':'id'}});let d=await r.json();let a=d.address||{};let kab=a.city||a.county||a.town||'';let prov=a.state||'';document.getElementById('autoCity').innerHTML=`<i class="fa-solid fa-location-dot text-emerald-500 animate-pulse"></i> ${kab}${prov?', '+prov:''}`;}catch{}});}
+function addProduk(){ let n=prompt('Nama produk:'); if(!n) return; let s=prompt('Stok:','10'); let data=JSON.parse(localStorage.getItem('produk')||'[]'); data.push({nama:n,stok:parseInt(s)||0}); localStorage.setItem('produk',JSON.stringify(data)); loadProduk(); }
+loadProduk();
+
+// POS
+let total=0; function bayar(){ total+=85000; document.getElementById('posTotal').innerText='Rp '+total.toLocaleString('id-ID'); let c=JSON.parse(localStorage.getItem('cash')||'[]'); c.push({tgl:new Date().toISOString(),total:85000}); localStorage.setItem('cash',JSON.stringify(c)); }
+
+// BACKUP - SOLUSI GANTI HP
+function exportData(){
+  const data={}; for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); data[k]=localStorage.getItem(k); }
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`ribasa-backup-${new Date().toISOString().slice(0,10)}.json`; a.click();
+  alert('Backup berhasil didownload! Kirim file ini via WA ke HP baru.');
+}
+function importData(file){
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{ try{ const data=JSON.parse(e.target.result); Object.keys(data).forEach(k=>localStorage.setItem(k,data[k])); alert('Restore berhasil! App akan reload.'); location.reload(); }catch(err){ alert('File backup rusak'); } };
+  reader.readAsText(file);
+}
 </script>
-</body></html>
+</body>
+</html>
