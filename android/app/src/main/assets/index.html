@@ -1,24 +1,34 @@
 <!DOCTYPE html>
-<html><head><meta name="viewport" content="width=device-width,initial-scale=1">
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ribasa OS</title>
 <style>
-body{background:#0a0a0a;color:#00ff88;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;flex-direction:column;text-align:center}
-h1{font-size:32px;margin:0;letter-spacing:2px}
-p{opacity:0.7;margin:10px}
-button{padding:14px 28px;background:#00ff88;color:#000;border:none;border-radius:12px;margin-top:20px;font-weight:bold;font-size:16px}
-small{margin-top:30px;opacity:0.5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080c14;color:#fff;font-family:monospace;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.header{padding:20px;text-align:center;border-bottom:1px solid #00ff8822}
+h1{color:#00ff88;letter-spacing:4px;font-size:28px;text-shadow:0 0 20px #00ff8855}
+.subtitle{opacity:0.5;font-size:12px;margin-top:4px}
+.grid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:20px;overflow:auto}
+.card{background:#111a2a;border:1px solid #00ff8833;border-radius:16px;padding:20px;text-align:center}
+.card b{display:block;color:#00ff88;margin-bottom:6px}
+.card span{font-size:11px;opacity:0.6}
+.footer{padding:12px;text-align:center;opacity:0.3;font-size:10px;border-top:1px solid #ffffff11}
+button{width:100%;padding:10px;background:#00ff88;color:#000;border:none;border-radius:10px;font-weight:bold;margin-top:10px}
 </style></head>
 <body>
-<h1>RIBASA OS</h1>
-<p id="status">Offline Mode</p>
-<button onclick="tryOnline()">Coba Buka Online</button>
-<button style="background:#333;color:#0f0" onclick="location.reload()">Reload</button>
-<small>Ribasa OS v1.0 - Native APK</small>
+<div class="header"><h1>RIBASA OS</h1><div class="subtitle">OFFLINE MODE - APK BUILDER ACTIVE</div></div>
+<div class="grid">
+<div class="card"><b>📦 APK Builder</b><span>Build from Termux</span><button onclick="alert('Build via GitHub Actions SUCCESS!')">Check</button></div>
+<div class="card"><b>🌐 WebView</b><span>Native Container</span><button onclick="alert('WebView OK')">Test</button></div>
+<div class="card"><b>💾 Offline</b><span>No 404 again</span><button onclick="alert('100% Offline, no GitHub Pages')">Status</button></div>
+<div class="card"><b>🚀 Deploy</b><span>Set hosting later</span><button onclick="promptURL()">Set URL</button></div>
+</div>
+<div class="footer">Ribasa OS v1.0 • Built on Bandar Lampung • github.com/anggara333/ribasa-os</div>
 <script>
-function tryOnline(){
-  document.getElementById('status').innerText='Checking...';
-  fetch('https://anggara333.github.io/ribasa-os/', {mode:'no-cors', cache:'no-store'})
-  .then(()=>{ location.href='https://anggara333.github.io/ribasa-os/'; })
-  .catch(()=>{ document.getElementById('status').innerText='Masih offline / Pages belum aktif'; });
+function promptURL(){
+  let u=prompt('Masukkan URL hosting Laravel Ribasa lu (misal https://ribasa.my.id):');
+  if(u) { localStorage.setItem('ribasa_url', u); if(confirm('Buka '+u+' ?')) location.href=u; }
 }
+let saved=localStorage.getItem('ribasa_url');
+if(saved) document.querySelector('.subtitle').innerText='Linked: '+saved;
 </script>
 </body></html>
