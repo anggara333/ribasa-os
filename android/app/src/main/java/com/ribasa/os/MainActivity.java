@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebSettings;
+import android.webkit.WebResourceRequest;
 public class MainActivity extends Activity {
     private WebView webView;
     private static final String REMOTE_URL = "https://anggara333.github.io/ribasa-os/";
@@ -17,13 +18,15 @@ public class MainActivity extends Activity {
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
         s.setAllowFileAccess(true);
+        s.setAllowFileAccessFromFileURLs(true);
+        s.setAllowUniversalAccessFromFileURLs(true);
         webView.setWebViewClient(new WebViewClient(){
             @Override
-            public void onReceivedError(WebView view, int code, String desc, String url){
-                if(url.equals(REMOTE_URL)) view.loadUrl(LOCAL_URL);
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return false;
             }
         });
-        webView.loadUrl(REMOTE_URL);
+        webView.loadUrl(LOCAL_URL);
     }
     @Override
     public void onBackPressed() {
