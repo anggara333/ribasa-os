@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.Ribasa" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">#EDE6DE</item>
+    </style>
+</resources>
